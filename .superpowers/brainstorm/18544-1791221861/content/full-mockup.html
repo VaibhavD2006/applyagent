@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ApplyAgent — Landing Page Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        oklch(10.5% 0.025 245);
+    --surface:   oklch(14%   0.022 245);
+    --surface2:  oklch(17%   0.022 245);
+    --border:    oklch(24%   0.022 245);
+    --muted:     oklch(50%   0.045 220);
+    --text:      oklch(88%   0.018 240);
+    --heading:   oklch(97%   0.006 240);
+    --cyan:      oklch(79%   0.19  200);
+    --cyan-dim:  oklch(79%   0.19  200 / 0.7);
+    --cyan-glow: oklch(79%   0.19  200 / 0.12);
+    --cyan-glow2:oklch(79%   0.19  200 / 0.06);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Figtree', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─────────── NAV ─────────── */
+  nav {
+    position: fixed;
+    top: 20px; left: 50%; transform: translateX(-50%);
+    z-index: 50;
+    display: flex; align-items: center; gap: 40px;
+    background: oklch(14% 0.022 245 / 0.7);
+    backdrop-filter: blur(20px) saturate(1.8);
+    -webkit-backdrop-filter: blur(20px) saturate(1.8);
+    border: 1px solid oklch(32% 0.02 245 / 0.5);
+    border-radius: 100px;
+    padding: 10px 10px 10px 24px;
+  }
+  .nav-logo {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 700; font-size: 17px;
+    color: var(--heading); white-space: nowrap;
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--cyan); }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a {
+    font-size: 14px; font-weight: 500; color: var(--muted);
+    text-decoration: none; transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--heading); }
+  .nav-cta {
+    background: var(--cyan);
+    color: oklch(12% 0.02 245);
+    font-weight: 700; font-size: 13px;
+    border: none; border-radius: 100px;
+    padding: 9px 20px; cursor: pointer;
+    transition: background 0.15s, box-shadow 0.15s;
+    white-space: nowrap; font-family: 'Figtree', sans-serif;
+  }
+  .nav-cta:hover {
+    background: oklch(85% 0.19 200);
+    box-shadow: 0 0 24px oklch(79% 0.19 200 / 0.4);
+  }
+
+  /* ─────────── HERO ─────────── */
+  .hero {
+    padding: 180px 24px 120px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Background radial glow */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 60px; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 500px;
+    background: radial-gradient(ellipse at center,
+      oklch(79% 0.19 200 / 0.08) 0%,
+      transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--cyan-glow);
+    border: 1px solid oklch(79% 0.19 200 / 0.25);
+    border-radius: 100px;
+    padding: 6px 14px 6px 10px;
+    margin-bottom: 36px;
+    font-size: 12px; font-weight: 600;
+    color: var(--cyan); letter-spacing: 0.02em;
+  }
+  .hero-eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--cyan);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  .hero h1 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 800;
+    color: var(--heading);
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+    margin-bottom: 28px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero h1 .accent { color: var(--cyan); }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto 44px;
+    line-height: 1.65;
+    font-weight: 400;
+  }
+
+  .hero-btns {
+    display: flex; gap: 14px;
+    justify-content: center; flex-wrap: wrap;
+    margin-bottom: 72px;
+  }
+  .btn-primary {
+    background: var(--cyan);
+    color: oklch(11% 0.025 245);
+    font-family: 'Figtree', sans-serif;
+    font-weight: 700; font-size: 15px;
+    border: none; border-radius: 12px;
+    padding: 14px 28px; cursor: pointer;
+    transition: background 0.15s, box-shadow 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover {
+    background: oklch(84% 0.19 200);
+    box-shadow: 0 0 40px oklch(79% 0.19 200 / 0.45);
+    transform: translateY(-1px);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    font-family: 'Figtree', sans-serif;
+    font-weight: 600; font-size: 15px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 28px; cursor: pointer;
+    transition: border-color 0.15s, color 0.15s, transform 0.15s;
+  }
+  .btn-ghost:hover {
+    border-color: var(--cyan-dim);
+    color: var(--heading);
+    transform: translateY(-1px);
+  }
+
+  /* Agent status card */
+  .agent-card {
+    display: inline-block;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 0;
+    overflow: hidden;
+    max-width: 440px;
+    width: 100%;
+    text-align: left;
+    box-shadow: 0 24px 80px oklch(0% 0 0 / 0.5),
+                0 0 0 1px var(--border);
+  }
+  .agent-card-header {
+    background: var(--surface2);
+    padding: 12px 16px;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .traffic-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .agent-card-title {
+    font-size: 12px; font-weight: 600;
+    color: var(--muted); margin-left: 4px; flex: 1;
+    font-family: 'Figtree', monospace;
+    letter-spacing: 0.02em;
+  }
+  .agent-badge {
+    font-size: 10px; font-weight: 700;
+    padding: 3px 8px; border-radius: 6px;
+    background: oklch(79% 0.19 200 / 0.15);
+    color: var(--cyan);
+    border: 1px solid oklch(79% 0.19 200 / 0.2);
+  }
+  .agent-body { padding: 16px; }
+  .agent-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    transition: background 0.15s;
+  }
+  .agent-row.done { background: oklch(79% 0.19 200 / 0.06); }
+  .agent-row.active { background: oklch(79% 0.19 200 / 0.1); }
+  .agent-row.pending { opacity: 0.35; }
+  .agent-icon {
+    width: 22px; height: 22px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .agent-icon svg { width: 13px; height: 13px; }
+  .agent-row.done .agent-icon { background: oklch(79% 0.19 200 / 0.15); }
+  .agent-row.active .agent-icon { background: oklch(79% 0.19 200 / 0.2); }
+  .agent-row.pending .agent-icon { background: var(--border); }
+  .agent-row-label { font-size: 12px; font-weight: 500; flex: 1; }
+  .agent-row.done .agent-row-label { color: var(--text); }
+  .agent-row.active .agent-row-label { color: var(--heading); }
+  .agent-status {
+    font-size: 10px; font-weight: 700;
+    border-radius: 6px; padding: 2px 7px;
+  }
+  .status-done { background: oklch(79% 0.19 200 / 0.12); color: var(--cyan); }
+  .status-active {
+    background: oklch(79% 0.19 200 / 0.15); color: var(--cyan);
+    animation: blink 1.5s ease-in-out infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  .status-pending { background: var(--border); color: var(--muted); }
+
+  /* ─────────── HOW IT WORKS ─────────── */
+  section { padding: 100px 24px; }
+  .container { max-width: 900px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 12px; font-weight: 700;
+    color: var(--cyan); letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 16px; text-align: center;
+  }
+  .section-title {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    color: var(--heading); line-height: 1.1;
+    letter-spacing: -0.03em;
+    text-align: center; margin-bottom: 20px;
+    text-wrap: balance;
+  }
+  .section-sub {
+    font-size: 1.05rem; color: var(--muted);
+    text-align: center; max-width: 520px;
+    margin: 0 auto 72px;
+    line-height: 1.65;
+  }
+
+  /* Pipeline steps */
+  .pipeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .pipeline::before {
+    content: '';
+    position: absolute;
+    left: 23px; top: 24px; bottom: 24px;
+    width: 1px;
+    background: linear-gradient(to bottom,
+      var(--cyan) 0%,
+      oklch(79% 0.19 200 / 0.3) 50%,
+      transparent 100%);
+  }
+  .pipeline-step {
+    display: flex; gap: 24px; align-items: flex-start;
+    padding: 20px 0;
+    position: relative;
+  }
+  .step-node {
+    width: 48px; height: 48px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    position: relative; z-index: 1;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800; font-size: 15px;
+  }
+  .step-node.active {
+    background: var(--cyan);
+    color: oklch(12% 0.02 245);
+    box-shadow: 0 0 30px oklch(79% 0.19 200 / 0.5);
+  }
+  .step-node.dim {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .step-content { padding-top: 10px; }
+  .step-title {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 1.2rem; font-weight: 700;
+    color: var(--heading); margin-bottom: 6px;
+    letter-spacing: -0.02em;
+  }
+  .step-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+
+  /* ─────────── FEATURES ─────────── */
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  .feat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+    cursor: default;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .feat-card::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: var(--cyan-glow2);
+    transition: opacity 0.3s;
+    opacity: 0;
+  }
+  .feat-card:hover {
+    border-color: oklch(79% 0.19 200 / 0.35);
+    box-shadow: 0 0 40px oklch(79% 0.19 200 / 0.07),
+                0 8px 32px oklch(0% 0 0 / 0.3);
+    transform: translateY(-2px);
+  }
+  .feat-card:hover::before { opacity: 1; }
+  .feat-card.wide { grid-column: span 2; }
+  .feat-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--cyan-glow);
+    border: 1px solid oklch(79% 0.19 200 / 0.2);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+  }
+  .feat-icon svg { width: 20px; height: 20px; color: var(--cyan); }
+  .feat-title {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 1.05rem; font-weight: 700;
+    color: var(--heading); margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .feat-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
+  .feat-tag {
+    display: inline-block; margin-top: 14px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+    color: var(--cyan);
+    background: var(--cyan-glow);
+    border: 1px solid oklch(79% 0.19 200 / 0.2);
+    border-radius: 6px; padding: 3px 8px;
+    text-transform: uppercase;
+  }
+
+  /* ─────────── APPROVAL SECTION ─────────── */
+  .approval-section {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .approval-inner {
+    max-width: 900px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+    padding: 100px 24px;
+  }
+  .approval-text h2 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--heading); line-height: 1.15;
+    letter-spacing: -0.03em; margin-bottom: 18px;
+    text-wrap: balance;
+  }
+  .approval-text p { font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
+  .approval-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 18px; padding: 24px;
+  }
+  .approval-card-header {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+  }
+  .approval-avatar {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 800; color: #fff;
+    font-family: 'Bricolage Grotesque', sans-serif;
+  }
+  .approval-name { font-weight: 600; font-size: 14px; color: var(--heading); }
+  .approval-role { font-size: 12px; color: var(--muted); }
+  .review-field {
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 12px 14px; margin-bottom: 10px;
+    font-size: 12px;
+  }
+  .review-field-label { color: var(--muted); font-size: 11px; margin-bottom: 4px; }
+  .review-field-value { color: var(--heading); font-weight: 500; }
+  .review-field.flagged { border-color: oklch(60% 0.15 50 / 0.4); background: oklch(60% 0.15 50 / 0.05); }
+  .review-field.flagged .review-field-label { color: oklch(70% 0.15 50); }
+  .approval-actions { display: flex; gap: 10px; margin-top: 16px; }
+  .approve-btn {
+    flex: 1; background: var(--cyan); color: oklch(11% 0.025 245);
+    font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 13px;
+    border: none; border-radius: 10px; padding: 10px;
+    cursor: pointer; transition: background 0.15s, box-shadow 0.15s;
+  }
+  .approve-btn:hover { background: oklch(84% 0.19 200); box-shadow: 0 0 24px oklch(79% 0.19 200 / 0.4); }
+  .reject-btn {
+    flex: 1; background: transparent; color: var(--muted);
+    font-family: 'Figtree', sans-serif; font-weight: 600; font-size: 13px;
+    border: 1px solid var(--border); border-radius: 10px; padding: 10px;
+    cursor: pointer; transition: border-color 0.15s, color 0.15s;
+  }
+  .reject-btn:hover { border-color: oklch(55% 0.18 20 / 0.5); color: oklch(65% 0.18 20); }
+
+  /* ─────────── FINAL CTA ─────────── */
+  .cta-section {
+    text-align: center;
+    padding: 120px 24px 140px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 400px;
+    background: radial-gradient(ellipse at center,
+      oklch(79% 0.19 200 / 0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-section h2 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    font-weight: 800;
+    color: var(--heading); line-height: 1.0;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+    margin-bottom: 24px;
+  }
+  .cta-section h2 .accent { color: var(--cyan); }
+  .cta-section p { font-size: 1.05rem; color: var(--muted); margin-bottom: 40px; }
+  .cta-input-row {
+    display: flex; gap: 10px; justify-content: center;
+    max-width: 440px; margin: 0 auto;
+  }
+  .cta-input {
+    flex: 1; background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 14px 18px;
+    color: var(--text); font-family: 'Figtree', sans-serif; font-size: 15px;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .cta-input::placeholder { color: var(--muted); }
+  .cta-input:focus {
+    border-color: oklch(79% 0.19 200 / 0.5);
+    box-shadow: 0 0 0 3px oklch(79% 0.19 200 / 0.1);
+  }
+
+  /* ─────────── FOOTER ─────────── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 24px;
+    text-align: center;
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 900px; margin: 0 auto;
+  }
+  .footer-logo {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 700; font-size: 16px;
+    color: var(--heading); letter-spacing: -0.02em;
+  }
+  .footer-logo span { color: var(--cyan); }
+  footer p { font-size: 12px; color: var(--muted); }
+
+  /* divider */
+  .divider {
+    height: 1px; background: var(--border);
+    max-width: 900px; margin: 0 auto;
+  }
+
+  @media (max-width: 640px) {
+    .features-grid { grid-template-columns: 1fr; }
+    .feat-card.wide { grid-column: span 1; }
+    .approval-inner { grid-template-columns: 1fr; gap: 40px; }
+    nav { gap: 16px; }
+    .nav-links { display: none; }
+    footer { flex-direction: column; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Apply<span>Agent</span></div>
+  <div class="nav-links">
+    <a href="#">How it works</a>
+    <a href="#">Features</a>
+    <a href="#">Pricing</a>
+  </div>
+  <button class="nav-cta">Get early access</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">
+    <div class="hero-eyebrow-dot"></div>
+    Now in early access
+  </div>
+  <h1>Your resume.<br>Every job.<br><span class="accent">Zero friction.</span></h1>
+  <p class="hero-sub">Upload your resume once. ApplyAgent reads each form, maps your experience to every field, generates grounded answers, and waits for your go-ahead before submitting a single application.</p>
+  <div class="hero-btns">
+    <button class="btn-primary">Start applying for free</button>
+    <button class="btn-ghost">Watch a demo</button>
+  </div>
+
+  <!-- Agent activity card -->
+  <div class="agent-card">
+    <div class="agent-card-header">
+      <div class="traffic-dot" style="background:#ff6058"></div>
+      <div class="traffic-dot" style="background:#febc2e"></div>
+      <div class="traffic-dot" style="background:#28c840"></div>
+      <span class="agent-card-title">agent.run — Stripe Backend Engineer</span>
+      <span class="agent-badge">LIVE</span>
+    </div>
+    <div class="agent-body">
+      <div class="agent-row done">
+        <div class="agent-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <span class="agent-row-label">Resume parsed &amp; profile built</span>
+        <span class="agent-status status-done">done</span>
+      </div>
+      <div class="agent-row done">
+        <div class="agent-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <span class="agent-row-label">Form fields mapped (14/14)</span>
+        <span class="agent-status status-done">done</span>
+      </div>
+      <div class="agent-row active">
+        <div class="agent-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        </div>
+        <span class="agent-row-label">Generating open-ended answers</span>
+        <span class="agent-status status-active">filling</span>
+      </div>
+      <div class="agent-row pending">
+        <div class="agent-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <span class="agent-row-label">Awaiting your approval</span>
+        <span class="agent-status status-pending">next</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="container">
+    <div class="section-label">The pipeline</div>
+    <h2 class="section-title">From resume to submitted<br>in four steps</h2>
+    <p class="section-sub">A deterministic pipeline that maps your profile to each form, generates grounded answers, and never submits without your explicit sign-off.</p>
+
+    <div class="pipeline">
+      <div class="pipeline-step">
+        <div class="step-node active">1</div>
+        <div class="step-content">
+          <div class="step-title">Upload your resume</div>
+          <div class="step-desc">Drop a PDF or DOCX. ApplyAgent reads every line and builds a structured profile with stable fact IDs — no hallucinated employers, no invented dates.</div>
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-node active">2</div>
+        <div class="step-content">
+          <div class="step-title">Paste the job URL</div>
+          <div class="step-desc">The agent opens the application form, detects every field, classifies each question, and maps your profile facts before writing a single character.</div>
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-node active">3</div>
+        <div class="step-content">
+          <div class="step-title">Review every answer</div>
+          <div class="step-desc">Open-ended questions are answered using only your verified profile. Sensitive fields and low-confidence answers are flagged and held for your approval.</div>
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-node dim">4</div>
+        <div class="step-content">
+          <div class="step-title">Approve and submit</div>
+          <div class="step-desc">One click issues the approval token. The agent fills the form and submits. Nothing moves without your explicit go-ahead.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FEATURES -->
+<section>
+  <div class="container">
+    <div class="section-label">Built right</div>
+    <h2 class="section-title">Not just another autofill</h2>
+    <p class="section-sub">Every design decision in ApplyAgent exists to prevent the failure mode of AI job tools: confidently wrong answers and silent submissions.</p>
+
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><path d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        </div>
+        <div class="feat-title">Fact-grounded answers</div>
+        <div class="feat-desc">Every generated answer traces to a verified fact in your profile. No employer you didn't work for. No skill you didn't list.</div>
+        <span class="feat-tag">Zero hallucination</span>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="feat-title">Human approval gate</div>
+        <div class="feat-desc">The agent cannot submit without your signed token. Sensitive fields (visa status, disability, salary) are always held for review, never auto-filled.</div>
+        <span class="feat-tag">Always in control</span>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        </div>
+        <div class="feat-title">Deterministic field mapping</div>
+        <div class="feat-desc">Name, email, phone, location — standard fields are filled from your profile without touching the LLM. Fast, accurate, and auditable.</div>
+        <span class="feat-tag">No LLM overhead</span>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
+        <div class="feat-title">Works across job boards</div>
+        <div class="feat-desc">Greenhouse, Lever, Workday, and any generic HTML form. The agent adapts to each ATS without you configuring anything.</div>
+        <span class="feat-tag">Multi-ATS</span>
+      </div>
+
+      <div class="feat-card wide">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+        </div>
+        <div class="feat-title">Versioned profile, always in sync</div>
+        <div class="feat-desc">Your candidate profile is versioned and immutable. Every update creates a new version row — you can see exactly what facts were used for any application, long after it's submitted.</div>
+        <span class="feat-tag">Full audit trail</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROVAL SHOWCASE -->
+<div class="approval-section">
+  <div class="approval-inner">
+    <div class="approval-text">
+      <div class="section-label" style="text-align:left">Approval gate</div>
+      <h2>You decide.<br>The agent executes.</h2>
+      <p>Before any form gets submitted, you see every answer. Flag a response, edit a field, or reject the whole application. The agent can't move past this screen without your token.</p>
+    </div>
+    <div class="approval-card">
+      <div class="approval-card-header">
+        <div class="approval-avatar">A</div>
+        <div>
+          <div class="approval-name">Alice Chen</div>
+          <div class="approval-role">Stripe — Backend Engineer</div>
+        </div>
+      </div>
+      <div class="review-field">
+        <div class="review-field-label">Full name</div>
+        <div class="review-field-value">Alice Chen</div>
+      </div>
+      <div class="review-field">
+        <div class="review-field-label">Years of experience</div>
+        <div class="review-field-value">4 years</div>
+      </div>
+      <div class="review-field flagged">
+        <div class="review-field-label">⚠ Requires sponsorship?</div>
+        <div class="review-field-value">Flagged for your review</div>
+      </div>
+      <div class="approval-actions">
+        <button class="approve-btn">Approve &amp; Submit</button>
+        <button class="reject-btn">Reject</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Ready to apply<br><span class="accent">properly?</span></h2>
+    <p>Join the waitlist. We're rolling out access in batches.</p>
+    <div class="cta-input-row">
+      <input class="cta-input" type="email" placeholder="your@email.com">
+      <button class="btn-primary" style="white-space:nowrap">Join waitlist</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div style="border-top: 1px solid var(--border)">
+  <footer>
+    <div class="footer-logo">Apply<span>Agent</span></div>
+    <p>© 2026 ApplyAgent. Built to never fabricate.</p>
+    <div style="display:flex;gap:20px">
+      <a href="#" style="font-size:12px;color:var(--muted);text-decoration:none">Privacy</a>
+      <a href="#" style="font-size:12px;color:var(--muted);text-decoration:none">Terms</a>
+      <a href="#" style="font-size:12px;color:var(--muted);text-decoration:none">GitHub</a>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>

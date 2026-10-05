@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Layout Options — ApplyAgent</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: #0f0f11; color: #e0eeff; padding: 32px 24px 80px; }
+  h1 { font-size: 22px; font-weight: 600; color: #e8e8f0; margin-bottom: 6px; }
+  .subtitle { font-size: 14px; color: #666; margin-bottom: 36px; }
+
+  .layouts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1080px; }
+
+  .layout-card {
+    border-radius: 14px; overflow: hidden;
+    border: 2px solid #1e2a3a;
+    cursor: pointer;
+    transition: transform 0.15s, border-color 0.15s;
+    background: #101825;
+  }
+  .layout-card:hover { transform: translateY(-3px); border-color: #1e4060; }
+  .layout-card.selected { border-color: #00d4ff; }
+
+  .preview {
+    background: #0b1628;
+    padding: 16px 14px;
+    height: 320px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* shared preview blocks */
+  .p-nav { height: 10px; background: #0f2044; border-radius: 3px; margin-bottom: 12px; display: flex; justify-content: space-between; padding: 0 4px; align-items: center; }
+  .p-nav-logo { width: 28px; height: 5px; background: #00d4ff; border-radius: 2px; opacity: 0.9; }
+  .p-nav-links { display: flex; gap: 6px; }
+  .p-nav-link { width: 18px; height: 4px; background: #1e3a5a; border-radius: 2px; }
+  .p-nav-btn { width: 26px; height: 7px; background: #00d4ff; border-radius: 3px; opacity: 0.8; }
+
+  .p-tag { height: 6px; width: 50px; background: rgba(0,212,255,0.2); border-radius: 10px; margin-bottom: 8px; }
+  .p-h1-lg { height: 11px; border-radius: 3px; background: #e8f4ff; margin-bottom: 6px; }
+  .p-h1-sm { height: 8px; border-radius: 3px; background: rgba(232,244,255,0.4); margin-bottom: 12px; }
+  .p-body { height: 4px; border-radius: 2px; background: #1a3050; margin-bottom: 4px; }
+  .p-btns { display: flex; gap: 6px; margin-top: 10px; }
+  .p-btn-a { height: 10px; width: 44px; background: #00d4ff; border-radius: 4px; opacity: 0.9; }
+  .p-btn-b { height: 10px; width: 38px; background: transparent; border: 1px solid rgba(0,212,255,0.3); border-radius: 4px; }
+
+  .p-divider { height: 1px; background: #0f2044; margin: 10px 0; }
+
+  /* section blocks */
+  .p-steps { display: flex; gap: 6px; margin: 6px 0; }
+  .p-step { flex: 1; background: #0d1e36; border-radius: 6px; padding: 5px 4px; }
+  .p-step-num { width: 10px; height: 10px; border-radius: 50%; background: #00d4ff; margin-bottom: 4px; opacity: 0.7; }
+  .p-step-line { height: 3px; background: #1a3050; border-radius: 1px; margin-bottom: 3px; }
+  .p-step-line-s { height: 3px; background: #1a3050; border-radius: 1px; width: 60%; }
+
+  .p-features { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin: 6px 0; }
+  .p-feat { background: #0d1e36; border-radius: 5px; padding: 5px; }
+  .p-feat-icon { width: 10px; height: 10px; border-radius: 3px; background: rgba(0,212,255,0.25); margin-bottom: 4px; }
+  .p-feat-title { height: 4px; background: #c0d8f0; border-radius: 1px; width: 70%; margin-bottom: 3px; }
+  .p-feat-body { height: 3px; background: #1a3050; border-radius: 1px; }
+
+  .p-stats { display: flex; gap: 6px; margin: 6px 0; }
+  .p-stat { flex: 1; background: #0d1e36; border-radius: 5px; padding: 5px; text-align: center; }
+  .p-stat-num { height: 8px; background: #00d4ff; border-radius: 2px; width: 60%; margin: 0 auto 3px; opacity: 0.7; }
+  .p-stat-lbl { height: 3px; background: #1a3050; border-radius: 1px; width: 80%; margin: 0 auto; }
+
+  .p-screenshot { background: #0d1e36; border-radius: 8px; border: 1px solid #1a3050; }
+  .p-ss-bar { height: 8px; background: #0b2040; border-radius: 8px 8px 0 0; padding: 0 4px; display: flex; align-items: center; gap: 3px; }
+  .p-ss-dot { width: 4px; height: 4px; border-radius: 50%; }
+  .p-ss-content { padding: 6px; }
+  .p-ss-row { height: 4px; background: #1a3050; border-radius: 1px; margin-bottom: 4px; }
+  .p-ss-row-s { height: 4px; background: #1a3050; border-radius: 1px; width: 70%; margin-bottom: 4px; }
+  .p-ss-field { height: 7px; background: #0f2844; border-radius: 3px; margin-bottom: 4px; border: 1px solid #1a3a55; }
+
+  .p-cta-band { background: #0d1e36; border-radius: 7px; padding: 10px; text-align: center; margin: 6px 0; }
+  .p-cta-h { height: 6px; background: #c0d8f0; border-radius: 2px; width: 55%; margin: 0 auto 5px; }
+  .p-cta-b { display: flex; justify-content: center; gap: 6px; margin-top: 6px; }
+
+  .card-info { padding: 14px 16px 16px; }
+  .card-name { font-size: 13px; font-weight: 700; color: #c8dff8; margin-bottom: 4px; }
+  .card-desc { font-size: 11px; color: #4a6a8a; line-height: 1.5; }
+  .rec-badge { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; background: #00d4ff; color: #0b1628; padding: 2px 7px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+
+  .sel-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #0d1523; border-top: 1px solid #1a2a3a; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #556; }
+  .sel-bar span { color: #e0eeff; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<h1>Page Layout — Which structure?</h1>
+<p class="subtitle">All three use Navy & Cyan. Pick the page flow that feels right.</p>
+
+<div class="layouts">
+
+  <!-- Layout A: Centered Minimal -->
+  <div class="layout-card" data-choice="a" onclick="pick(this)">
+    <div class="preview">
+      <!-- nav -->
+      <div class="p-nav"><div class="p-nav-logo"></div><div class="p-nav-links"><div class="p-nav-link"></div><div class="p-nav-link"></div><div class="p-nav-link"></div><div class="p-nav-btn"></div></div></div>
+      <!-- hero centered -->
+      <div style="text-align:center;padding:0 10px">
+        <div class="p-tag" style="margin:0 auto 8px"></div>
+        <div class="p-h1-lg" style="width:75%;margin:0 auto 5px"></div>
+        <div class="p-h1-lg" style="width:55%;margin:0 auto 5px"></div>
+        <div class="p-body" style="width:85%;margin:3px auto"></div>
+        <div class="p-body" style="width:70%;margin:3px auto 10px"></div>
+        <div class="p-btns" style="justify-content:center"><div class="p-btn-a"></div><div class="p-btn-b"></div></div>
+      </div>
+      <div class="p-divider" style="margin:10px 0"></div>
+      <!-- stats row -->
+      <div class="p-stats"><div class="p-stat"><div class="p-stat-num"></div><div class="p-stat-lbl"></div></div><div class="p-stat"><div class="p-stat-num"></div><div class="p-stat-lbl"></div></div><div class="p-stat"><div class="p-stat-num"></div><div class="p-stat-lbl"></div></div></div>
+      <div class="p-divider"></div>
+      <!-- features centered 2x2 -->
+      <div class="p-features">
+        <div class="p-feat"><div class="p-feat-icon"></div><div class="p-feat-title"></div><div class="p-feat-body"></div></div>
+        <div class="p-feat"><div class="p-feat-icon"></div><div class="p-feat-title"></div><div class="p-feat-body"></div></div>
+        <div class="p-feat"><div class="p-feat-icon"></div><div class="p-feat-title"></div><div class="p-feat-body"></div></div>
+        <div class="p-feat"><div class="p-feat-icon"></div><div class="p-feat-title"></div><div class="p-feat-body"></div></div>
+      </div>
+    </div>
+    <div class="card-info">
+      <div class="card-name">A — Centered Minimal</div>
+      <div class="card-desc">Everything center-aligned. Clean white space. Apple/Linear vibe. Simple and focused — no distractions.</div>
+    </div>
+  </div>
+
+  <!-- Layout B: Split Hero + Sections (recommended) -->
+  <div class="layout-card" data-choice="b" onclick="pick(this)">
+    <div class="preview">
+      <div class="p-nav"><div class="p-nav-logo"></div><div class="p-nav-links"><div class="p-nav-link"></div><div class="p-nav-link"></div><div class="p-nav-link"></div><div class="p-nav-btn"></div></div></div>
+      <!-- split hero -->
+      <div style="display:flex;gap:8px;margin-top:4px">
+        <div style="flex:1">
+          <div class="p-tag"></div>
+          <div class="p-h1-lg" style="width:90%"></div>
+          <div class="p-h1-lg" style="width:70%"></div>
+          <div class="p-body" style="width:95%;margin:3px 0"></div>
+          <div class="p-body" style="width:80%;margin:3px 0 8px"></div>
+          <div class="p-btns"><div class="p-btn-a"></div><div class="p-btn-b"></div></div>
+        </div>
+        <div style="flex:0.9">
+          <div class="p-screenshot">
+            <div class="p-ss-bar"><div class="p-ss-dot" style="background:#ff6b6b"></div><div class="p-ss-dot" style="background:#ffd93d"></div><div class="p-ss-dot" style="background:#6bcb77"></div></div>
+            <div class="p-ss-content">
+              <div class="p-ss-row"></div><div class="p-ss-row-s"></div>
+              <div class="p-ss-field"></div><div class="p-ss-field"></div>
+              <div class="p-ss-row" style="width:50%;height:7px;background:#00d4ff;opacity:0.5;border-radius:3px"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-divider"></div>
+      <!-- how it works: 3 steps -->
+      <div class="p-steps">
+        <div class="p-step"><div class="p-step-num"></div><div class="p-step-line"></div><div class="p-step-line-s"></div></div>
+        <div class="p-step"><div class="p-step-num" style="opacity:0.5"></div><div class="p-step-line"></div><div class="p-step-line-s"></div></div>
+        <div class="p-step"><div class="p-step-num" style="opacity:0.3"></div><div class="p-step-line"></div><div class="p-step-line-s"></div></div>
+      </div>
+      <div class="p-divider"></div>
+      <div class="p-features">
+        <div class="p-feat"><div class="p-feat-icon"></div><div class="p-feat-title"></div><div class="p-feat-body"></div></div>
+        <div class="p-feat"><div class="p-feat-icon"></div><div class="p-feat-title"></div><div class="p-feat-body"></div></div>
+        <div class="p-feat"><div class="p-feat-icon"></div><div class="p-feat-title"></div><div class="p-feat-body"></div></div>
+        <div class="p-feat"><div class="p-feat-icon"></div><div class="p-feat-title"></div><div class="p-feat-body"></div></div>
+      </div>
+    </div>
+    <div class="card-info">
+      <div class="card-name">B — Split Hero + Steps <span class="rec-badge">My pick</span></div>
+      <div class="card-desc">Left text, right app screenshot in the hero. "How It Works" steps section, then feature grid. Shows the product immediately.</div>
+    </div>
+  </div>
+
+  <!-- Layout C: Bold Stacked -->
+  <div class="layout-card" data-choice="c" onclick="pick(this)">
+    <div class="preview">
+      <div class="p-nav"><div class="p-nav-logo"></div><div class="p-nav-links"><div class="p-nav-link"></div><div class="p-nav-link"></div><div class="p-nav-link"></div><div class="p-nav-btn"></div></div></div>
+      <!-- massive headline -->
+      <div style="padding:6px 0 4px">
+        <div style="height:14px;width:95%;background:#e8f4ff;border-radius:3px;margin-bottom:4px"></div>
+        <div style="height:14px;width:80%;background:#e8f4ff;border-radius:3px;margin-bottom:4px;opacity:0.7"></div>
+        <div style="height:14px;width:60%;background:#00d4ff;border-radius:3px;margin-bottom:8px;opacity:0.6"></div>
+        <div class="p-body" style="width:85%;margin:2px 0"></div>
+        <div class="p-body" style="width:65%;margin:2px 0 8px"></div>
+        <div class="p-btns"><div class="p-btn-a"></div><div class="p-btn-b"></div></div>
+      </div>
+      <div class="p-divider"></div>
+      <!-- full-width screenshot strip -->
+      <div class="p-screenshot" style="margin:4px 0">
+        <div class="p-ss-bar"><div class="p-ss-dot" style="background:#ff6b6b"></div><div class="p-ss-dot" style="background:#ffd93d"></div><div class="p-ss-dot" style="background:#6bcb77"></div></div>
+        <div class="p-ss-content" style="display:flex;gap:6px">
+          <div style="flex:1"><div class="p-ss-field"></div><div class="p-ss-field"></div></div>
+          <div style="flex:1"><div class="p-ss-field"></div><div class="p-ss-field"></div></div>
+        </div>
+      </div>
+      <div class="p-divider"></div>
+      <!-- 3-col feature row -->
+      <div style="display:flex;gap:5px">
+        <div class="p-feat" style="flex:1"><div class="p-feat-icon"></div><div class="p-feat-title"></div><div class="p-feat-body"></div></div>
+        <div class="p-feat" style="flex:1"><div class="p-feat-icon"></div><div class="p-feat-title"></div><div class="p-feat-body"></div></div>
+        <div class="p-feat" style="flex:1"><div class="p-feat-icon"></div><div class="p-feat-title"></div><div class="p-feat-body"></div></div>
+      </div>
+      <div class="p-divider"></div>
+      <div class="p-cta-band"><div class="p-cta-h"></div><div class="p-cta-b"><div class="p-btn-a"></div></div></div>
+    </div>
+    <div class="card-info">
+      <div class="card-name">C — Bold Stacked</div>
+      <div class="card-desc">Huge headline dominates. Full-width app preview below it. 3-column features. Strong bottom CTA banner. Maximum impact.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="sel-bar">
+  <span id="sel-text">No selection — click a layout above</span>
+  <span style="font-size:11px;color:#334">Then reply in the terminal</span>
+</div>
+
+<script>
+  function pick(el) {
+    document.querySelectorAll('.layout-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    const names = {a:'Centered Minimal',b:'Split Hero + Steps',c:'Bold Stacked'};
+    document.getElementById('sel-text').textContent = '✓ Selected: ' + names[el.dataset.choice];
+    fetch('/event',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'click',choice:el.dataset.choice,text:el.querySelector('.card-name').textContent.trim(),timestamp:Date.now()})}).catch(()=>{});
+  }
+</script>
+</body>
+</html>

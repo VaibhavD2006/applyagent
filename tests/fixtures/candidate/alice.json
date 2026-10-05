@@ -1,0 +1,113 @@
+{
+  "id": "00000000-0000-0000-0000-000000000001",
+  "version": 1,
+  "createdAt": "2024-01-15T00:00:00.000Z",
+  "updatedAt": "2024-01-15T00:00:00.000Z",
+  "identity": {
+    "firstName": "Alice",
+    "lastName": "Smith",
+    "preferredName": "Ali"
+  },
+  "contact": {
+    "email": "alice@example.com",
+    "phone": "+1-555-123-4567",
+    "address": {
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": "94102",
+      "country": "United States"
+    }
+  },
+  "education": [
+    {
+      "factId": "FACT-E001",
+      "institution": "Massachusetts Institute of Technology",
+      "degree": "Bachelor of Science",
+      "field": "Computer Science",
+      "startDate": "2018-09",
+      "endDate": "2022-05",
+      "current": false,
+      "gpa": 3.9
+    }
+  ],
+  "experience": [
+    {
+      "factId": "FACT-X001",
+      "company": "Acme Corp",
+      "title": "Senior Software Engineer",
+      "startDate": "2022-06",
+      "current": true,
+      "responsibilities": [
+        "Led development of a microservices platform serving 10M daily requests",
+        "Mentored a team of 4 junior engineers",
+        "Reduced API latency by 40% through query optimization and caching"
+      ],
+      "location": "San Francisco, CA"
+    },
+    {
+      "factId": "FACT-X002",
+      "company": "Startup Inc",
+      "title": "Software Engineer Intern",
+      "startDate": "2021-06",
+      "endDate": "2021-09",
+      "current": false,
+      "responsibilities": [
+        "Built a real-time dashboard using React and WebSockets",
+        "Wrote integration tests covering 85% of new features"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "factId": "FACT-P001",
+      "name": "OpenApply",
+      "description": "Open-source job application tracker with AI-powered cover letter suggestions",
+      "technologies": ["TypeScript", "Next.js", "PostgreSQL", "OpenAI API"],
+      "url": "https://github.com/alice/openapply"
+    }
+  ],
+  "skills": [
+    { "factId": "FACT-S001", "name": "TypeScript", "proficiency": "expert" },
+    { "factId": "FACT-S002", "name": "React", "proficiency": "advanced" },
+    { "factId": "FACT-S003", "name": "PostgreSQL", "proficiency": "advanced" },
+    { "factId": "FACT-S004", "name": "Node.js", "proficiency": "expert" },
+    { "factId": "FACT-S005", "name": "AWS", "proficiency": "intermediate" },
+    { "factId": "FACT-S006", "name": "Docker", "proficiency": "intermediate" }
+  ],
+  "certifications": [],
+  "links": [
+    { "type": "linkedin", "url": "https://linkedin.com/in/alice-smith-dev" },
+    { "type": "github", "url": "https://github.com/alice" },
+    { "type": "portfolio", "url": "https://alicesmith.dev" }
+  ],
+  "workAuthorization": {
+    "value": "us_citizen",
+    "label": "US Citizen",
+    "requiresApproval": true
+  },
+  "sponsorship": {
+    "value": "no",
+    "label": "Does not require sponsorship",
+    "requiresApproval": true
+  },
+  "preferences": {
+    "targetRoles": ["Senior Software Engineer", "Staff Engineer", "Tech Lead"],
+    "targetLocations": ["San Francisco, CA", "New York, NY", "Remote"],
+    "remotePreference": "hybrid",
+    "noticePeriodDays": 14
+  },
+  "reusableAnswers": [
+    {
+      "factId": "FACT-R001",
+      "question": "Why are you looking for a new opportunity?",
+      "answer": "I am looking to take on greater technical leadership and work on larger-scale distributed systems challenges.",
+      "tags": ["motivation", "career-change"]
+    },
+    {
+      "factId": "FACT-R002",
+      "question": "What is your greatest professional achievement?",
+      "answer": "Leading the redesign of Acme Corp's core API gateway, which reduced latency by 40% and became the foundation for three new product lines.",
+      "tags": ["achievement", "impact"]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Checkbox Form Test</title></head>
+<body>
+  <h1>Application Form – Checkboxes</h1>
+  <form id="app-form">
+    <fieldset>
+      <legend>Skills</legend>
+      <label><input type="checkbox" name="skills" value="typescript"> TypeScript</label>
+      <label><input type="checkbox" name="skills" value="react"> React</label>
+      <label><input type="checkbox" name="skills" value="nodejs"> Node.js</label>
+      <label><input type="checkbox" name="skills" value="postgresql"> PostgreSQL</label>
+    </fieldset>
+
+    <div>
+      <label>
+        <input type="checkbox" name="eeo_consent" value="yes" required>
+        I consent to EEO data collection
+      </label>
+    </div>
+
+    <div>
+      <label>
+        <input type="checkbox" name="terms" value="agree" required>
+        I agree to the Terms and Conditions
+      </label>
+    </div>
+
+    <button type="submit">Submit Application</button>
+  </form>
+</body>
+</html>

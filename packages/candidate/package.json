@@ -1,0 +1,22 @@
+{
+  "name": "@applyagent/candidate",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@applyagent/llm": "workspace:*",
+    "mammoth": "^1.8.0",
+    "pdf-parse": "^1.1.1",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/pdf-parse": "^1.1.4",
+    "typescript": "^5.5.0"
+  }
+}

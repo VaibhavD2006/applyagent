@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Radio Form Test</title></head>
+<body>
+  <h1>Application Form – Radio Buttons</h1>
+  <form id="app-form">
+    <fieldset>
+      <legend>Employment Type</legend>
+      <label><input type="radio" name="employment_type" value="full-time" required> Full-Time</label>
+      <label><input type="radio" name="employment_type" value="part-time"> Part-Time</label>
+      <label><input type="radio" name="employment_type" value="contract"> Contract</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Work Authorization</legend>
+      <label><input type="radio" name="work_auth" value="yes" required> Yes, I am authorized to work in the US</label>
+      <label><input type="radio" name="work_auth" value="no"> No</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Sponsorship Required</legend>
+      <label><input type="radio" name="sponsorship" value="yes"> Yes</label>
+      <label><input type="radio" name="sponsorship" value="no"> No</label>
+    </fieldset>
+
+    <button type="submit">Submit Application</button>
+  </form>
+</body>
+</html>
